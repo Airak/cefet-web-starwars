@@ -18,13 +18,18 @@ $.ajax({
    		filme.dataset.episodeUrl= movie.url;
    		filme.innerHTML = "Episode " + movie.episode_id + ": " + movie.title;
    		itemFilme.appendChild(filme);
-
-
-   		// console.log(movie.title);
-   		// console.log(movie.episode_id);
-   		// console.log(opeaning_crawl);
-   		// console.log(url);
    }
   }
 
+});
+
+$("#movies ul").on('click', 'li', function(e){
+    let url = $(e.target).data('episodeUrl');
+    $.ajax({
+        url: url,
+        method: 'get',
+        success: function(resposta) {
+            $(".reading-animation").html("EPISÓDIO " + resposta.episode_id + "\n\n" + resposta.title + "\n\n" + resposta.opening_crawl);
+        }
+    });
 });
